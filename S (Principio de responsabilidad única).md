@@ -18,7 +18,7 @@ classDiagram
         +guardarEnBaseDatos() bool
     }
 ````
-3. DESPUÉS (H2: Aplicando SRP)
+2. DESPUÉS (H2: Aplicando SRP)
 ```mermaid
 classDiagram
     class OrdenVenta {
@@ -53,3 +53,7 @@ classDiagram
     CalculadoraDePrecios ..> OrdenVenta : lee detalles de
     RegistroDeVentas ..> OrdenVenta : persiste
 ````
+
+**Quien pedira cambios?**
+* OrdenVenta: Finanzas / Contabilidad
+* RegistroDeVentas: Infraestructura / TI (DBA)
