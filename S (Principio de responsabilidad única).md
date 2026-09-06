@@ -25,33 +25,35 @@ classDiagram
         +String idOrden
         +Date fecha
         +String estado
-        +double total
-        +asociarDetalle(DetalleOrden detalle)
+        +List~DetalleOrden~ detalles
     }
 
-    class CalculadoraDePrecios {
-        +calcularSubtotal(DetalleOrden detalle) double
-        +calcularImpuestos(double subtotal) double
-        +calcularTotal(List~DetalleOrden~ detalles) double
+    class CalculadorDeVenta {
+        +calcularTotal(OrdenVenta orden) double
     }
 
-    class RegistroDeVentas {
-        +guardar(OrdenVenta orden) bool
-        +buscarPorId(String idOrden) OrdenVenta
-        +actualizarEstado(String idOrden, String nuevoEstado) bool
+    class GestorDeEstadoVenta {
+        +cambiarEstado(OrdenVenta orden, String nuevoEstado)
     }
 
-    class GestorDeVentas {
-        +procesarVenta(OrdenVenta orden) bool
-        +cancelarVenta(String idOrden) bool
+    class RepositorioDeOrdenVenta {
+        +guardar(OrdenVenta orden)
+        +buscar(String idOrden) OrdenVenta
+        +actualizar(OrdenVenta orden)
+        +eliminar(String idOrden)
     }
 
-    %% Relaciones
-    GestorDeVentas --> CalculadoraDePrecios : usa para calcular
-    GestorDeVentas --> RegistroDeVentas : usa para guardar
-    GestorDeVentas --> OrdenVenta : opera sobre
-    CalculadoraDePrecios ..> OrdenVenta : lee detalles de
-    RegistroDeVentas ..> OrdenVenta : persiste
+    class DetalleOrden {
+        +int cantidad
+        +double precioUnitario
+        +double subtotal
+        +calcularSubtotal() double
+    }
+
+    OrdenVenta "1" *-- "1..*" DetalleOrden : contiene
+    CalculadorDeVenta ..> OrdenVenta : calcula
+    GestorDeEstadoVenta ..> OrdenVenta : gestiona estado
+    RepositorioDeOrdenVenta ..> OrdenVenta : persiste
 ````
 
 **Quien pedira cambios?**
