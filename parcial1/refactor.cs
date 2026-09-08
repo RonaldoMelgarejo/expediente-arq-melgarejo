@@ -3,7 +3,7 @@
 
 namespace Parcial1.Ferreteria;
 
-// PASO 1: CONTRATOS SEGREGADOS (ISP) dividimos la interfaz gorda en interfaces pequeñas
+// PASO 1: dividimos la interfaz gorda en interfaces pequeñas, Refactor: Ronaldo Pablo Melgarejo Cardozo
 
 // Interfaz #1: Solo para registrar pedidos
 public interface IRegistradorDePedidos
@@ -29,7 +29,7 @@ public interface IGeneradorDeReportes
     void VerReporteDeCompras();
 }
 
-// PASO 2: CONTRATOS PARA INFRAESTRUCTURA (DIP) creamos contratos que el negocio necesita
+// PASO 2: creamos contratos que el negocio necesita, Refactor: Ronaldo Pablo Melgarejo Cardozo
 
 // contrato para guardar pedidos
 public interface IRepositorioDePedidos
@@ -51,7 +51,7 @@ public interface ICalculadorDeDescuentos
 
 // PASO 3: implementaciones
 
-// --- Implementaciones de ISP ---
+// --- Implementaciones de ISP, Refactor: Ronaldo Pablo Melgarejo Cardozo ---
 
 // Vendedor SOLO firma lo que puede hacer
 public class Vendedor : IRegistradorDePedidos
@@ -76,7 +76,7 @@ public class Encargado : IRegistradorDePedidos, IAutenticadorDeVentas, IGestorDe
         => Console.WriteLine("[ENC] Reporte de compras del mes");
 }
 
-// --- Implementaciones de DIP ---
+// --- Implementaciones de DIP, Refactor: Ronaldo Pablo Melgarejo Cardozo ---
 
 // Repositorio concreto: MySQL
 public class RepositorioMySQL : IRepositorioDePedidos
